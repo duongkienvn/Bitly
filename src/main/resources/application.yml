@@ -1,0 +1,24 @@
+server:
+  port: 8081
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    username: ${DATABASE_USERNAME}
+    password: ${DATABASE_PASSWORD}
+    url: ${DATABASE_URL}
+  jpa:
+    properties:
+      hibernate:
+        dialect: ${DATABASE_DIALECT}
+        format_sql: true
+        show_sql: true
+    hibernate:
+      ddl-auto: update
+
+jwt:
+  secret: ${JWT_SECRET}
+  expiration: 17280000
+
+frontend:
+  url: ${FRONTEND_URL}
+
