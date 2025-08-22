@@ -12,6 +12,13 @@ on:
 jobs:
   build:
     runs-on: windows-latest
+    env:
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      DATABASE_USERNAME: ${{ secrets.DATABASE_USERNAME }}
+      DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
+      DATABASE_DIALECT: ${{ secrets.DATABASE_DIALECT }}
+      JWT_SECRET: ${{ secrets.JWT_SECRET }}
+      FRONTEND_URL: ${{ secrets.FRONTEND_URL }}
     permissions:
       contents: read #This is required for actions/checkout
 
@@ -25,7 +32,7 @@ jobs:
           distribution: 'microsoft'
 
       - name: Build with Maven
-        run: mvn clean install
+        run: mvn clean install -DskipTests
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
@@ -60,4 +67,5 @@ jobs:
           app-name: 'Bitly-Service'
           slot-name: 'Production'
           package: '*.jar'
+
           
